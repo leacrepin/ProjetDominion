@@ -29,10 +29,21 @@ public abstract class Card {
 	/**
 	 * Getters et setters
 	 */
-	public int getCost() {return cost;
+	
+	/**
+	 * 
+	 * @return le cout d'une {@code Card}
+	 */
+	public int getCost() {
+		return cost;
 	}
 	
-	public String getName() {return name;
+	/**
+	 * 
+	 * @return le nom d'une {@code Card}
+	 */
+	public String getName() {
+		return name;
 	}
 	
 	/**
