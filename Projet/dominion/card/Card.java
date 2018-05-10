@@ -21,16 +21,27 @@ public abstract class Card {
 	 * @param name le nom de la carte
 	 * @param cost le coût de la carte
 	 */
-	public Card(String name, int cost) {
+	public Card(String name, int cost) {this.name=name;this.cost=cost;
 	}
 	
 	/**
 	 * Getters et setters
 	 */
+	
+	/**
+	 * 
+	 * @return le cout d'une {@code Card}
+	 */
 	public int getCost() {
+		return cost;
 	}
 	
+	/**
+	 * 
+	 * @return le nom d'une {@code Card}
+	 */
 	public String getName() {
+		return name;
 	}
 	
 	/**
@@ -41,6 +52,8 @@ public abstract class Card {
 	 * {@code ArrayList} vide, auquel les sous-classes ajouteront les types.
 	 */
 	public List<CardType> getTypes() {
+		List<CardType> a = new ArrayList<CardType>();
+		return(a);
 	}
 	
 	/**
@@ -48,6 +61,7 @@ public abstract class Card {
 	 * (ici la fonction renvoie le nom de la carte)
 	 */
 	public String toString() {
+		return("Nom: "+name);
 	}
 	
 	/**
@@ -71,6 +85,7 @@ public abstract class Card {
 	 * non nulle).
 	 */
 	public int victoryValue(Player p) {
-		return 0;
+		int a = p.victoryPoints();
+		return a;
 	}
 }
