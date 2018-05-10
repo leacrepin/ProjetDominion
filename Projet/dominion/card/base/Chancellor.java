@@ -10,4 +10,13 @@ import dominion.card.*;
  * Vous pouvez immédiatement défausser votre deck.
  */
 public class Chancellor extends ActionCard {
+	public Chancellor() {
+		super("Chancellor", 3);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

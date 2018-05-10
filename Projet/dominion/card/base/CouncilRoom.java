@@ -11,4 +11,13 @@ import dominion.card.*;
  * Tous vos adversaires piochent 1 carte.
  */
 public class CouncilRoom extends ActionCard {
+	public CouncilRoom() {
+		super("Coucil Room", 5);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

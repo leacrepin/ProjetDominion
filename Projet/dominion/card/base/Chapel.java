@@ -9,4 +9,13 @@ import dominion.card.*;
  * Écartez jusqu'à 4 cartes de votre main.
  */
 public class Chapel extends ActionCard {
+	public Chapel() {
+		super("Chapel", 2);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }
