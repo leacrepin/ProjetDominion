@@ -1,6 +1,5 @@
 package dominion;
 import java.util.*;
-
 import dominion.card.*;
 import dominion.card.common.*;
 
@@ -34,6 +33,11 @@ public class Game {
 	private CardList trashedCards;
 	
 	/**
+	 * Scanner permettant de lire les entrées au clavier
+	 */
+	private Scanner scanner;
+	
+	/**
 	 * Constructeur
 	 * 
 	 * @param playerNames liste des noms des joueurs qui participent à la 
@@ -44,58 +48,9 @@ public class Game {
 	 * - 60 Copper
 	 * - 40 Silver
 	 * - 30 Gold
-	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 
-	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
+	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
-		//Initialisation
-		trashedCards=new CardList();
-		currentPlayerIndex=0;
-		
-		//Liste des joueurs
-		this.players=new Player[playerNames.length];
-		for(int i=0;i<playerNames.length;i++){
-			this.players[i]=new Player(playerNames[i],this);
-		}
-		
-		
-		
-		//Liste des cartes
-		this.supplyStacks=kingdomStacks;
-		CardList e=new CardList();
-		
-		//Ajout des coppers
-		for(int i=0;i<60;i++){
-			e.add(new Copper());
-		}
-		//Ajout des silvers
-		for(int i=0;i<40;i++){
-			e.add(new Silver());
-		}
-		//Ajout des silvers
-		for(int i=0;i<30;i++){
-			e.add(new Gold());
-		}
-		//Estate, Duchy et Province pour 2 joueurs
-		if(playerNames.length==2){
-			for(int i=0;i<8;i++){
-				e.add(new Estate());
-				e.add(new Duchy());
-				e.add(new Province());
-			}
-		}else{//3 et 4 joueurs
-			for(int i=0;i<12;i++){
-				e.add(new Estate());
-				e.add(new Duchy());
-				e.add(new Province());
-			}
-		}
-		//Cartes curse
-		for(int i=0;i<10*playerNames.length-1;i++){
-			e.add(new Curse());
-		}
-		
-		supplyStacks.add(e);
 	}
 	
 	/**
@@ -106,14 +61,12 @@ public class Game {
 	 * @param index indice dans le tableau des joueurs du joueur à renvoyer
 	 */
 	public Player getPlayer(int index) {
-		return(players[index]);
 	}
 	
 	/**
 	 * Renvoie le nombre de joueurs participant à la partie
 	 */
 	public int numberOfPlayers() {
-		return(players.length);
 	}
 	
 	/**
@@ -121,12 +74,6 @@ public class Game {
 	 * joueurs, ou -1 si le joueur n'est pas dans le tableau.
 	 */
 	private int indexOfPlayer(Player p) {
-		for(int i=0;i<numberOfPlayers();i++){
-			if(p.equals(players[i])){
-				return(i);
-			}
-		}
-		return(-1);
 	}
 	
 	/**
@@ -142,11 +89,6 @@ public class Game {
 	 * premier).
 	 */
 	public List<Player> otherPlayers(Player p) {
-		List<Player> a=new ArrayList<Player>();
-		for(int i=(indexOfPlayer(p)+1)%numberOfPlayers();!players[i].equals(p);i=(i+1)%numberOfPlayers()){
-			a.add(players[i]);
-		}
-		return(a);
 	}
 	
 	/**
@@ -157,13 +99,6 @@ public class Game {
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
 	public CardList availableSupplyCards() {
-		CardList a=new CardList();
-		for(int i=0;i<supplyStacks.size();i++){
-			if(supplyStacks.get(i)!=null){
-				a.add(supplyStacks.get(i).get(0));
-			}
-		}
-		return(a);
 	}
 	
 	/**
@@ -201,7 +136,6 @@ public class Game {
 	 * ne correspond
 	 */
 	public Card getFromSupply(String cardName) {
-		
 	}
 	
 	/**
@@ -252,4 +186,19 @@ public class Game {
 			System.out.println(String.format("%s: %d Points.\n%s\n", p.getName(), p.victoryPoints(), p.totalCards().toString()));
 		}
 	}
+	
+	/**
+	 * Lit une ligne de l'entrée standard
+	 * 
+	 * C'est cette méthode qui doit être appelée à chaque fois qu'on veut lire
+	 * l'entrée clavier de l'utilisateur (par exemple dans Player.choose), ce
+	 * qui permet de n'avoir qu'un seul Scanner pour tout le programme
+	 * 
+	 * @return une chaîne de caractères correspondant à la ligne suivante de
+	 * l'entrée standard (sans le retour à la ligne final)
+	 */
+	public String readLine() {
+		return this.scanner.nextLine();
+	}
+	
 }

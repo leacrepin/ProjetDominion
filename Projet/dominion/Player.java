@@ -1,6 +1,5 @@
 package dominion;
 import java.util.*;
-
 import dominion.card.*;
 
 /**
@@ -66,31 +65,24 @@ public class Player {
 	 * préparer la main du joueur après avoir placé les cartes dans la défausse.
 	 */
 	public Player(String name, Game game) {
-		this.name=name;
-		this.game=game;
 	}
 
 	/**
 	 * Getters et setters
 	 */
 	public String getName() {
-		return(name);
 	}
 	
 	public int getActions() {
-		return(actions);
 	}
 	
 	public int getMoney() {
-		return(money);
 	}
 	
 	public int getBuys() {
-		return(buys);
 	}
 	
 	public Game getGame() {
-		return(game);
 	}
 	
 	/**
@@ -100,7 +92,6 @@ public class Player {
 	 * souhaite diminuer le nombre d'actions)
 	 */
 	public void incrementActions(int n) {
-		actions=actions+n;
 	}
 	
 	/**
@@ -110,7 +101,6 @@ public class Player {
 	 * souhaite diminuer le nombre de pièces)
 	 */
 	public void incrementMoney(int n) {
-		money=money+n;
 	}
 	
 	/**
@@ -120,7 +110,6 @@ public class Player {
 	 * souhaite diminuer le nombre d'achats)
 	 */
 	public void incrementBuys(int n) {
-		buys+=n;
 	}
 
 	/**
@@ -129,8 +118,6 @@ public class Player {
 	 * éléments sont les mêmes que ceux de {@code this.hand}.
 	 */
 	public CardList cardsInHand() {
-		CardList l=new CardList(hand);
-		return l;
 	}
 	
 	/**
@@ -139,11 +126,6 @@ public class Player {
 	 * défausse, la pioche et en jeu)
 	 */
 	public CardList totalCards() {
-		CardList l=new CardList(hand);
-		l.addAll(discard);
-		l.addAll(draw);
-		l.addAll(inPlay);
-		return(l);
 	}
 	
 	/**
@@ -154,12 +136,6 @@ public class Player {
 	 * {@code victoryValue()}) des cartes
 	 */
 	public int victoryPoints() {
-		int p=0;
-		CardList deck = totalCards();
-		for(int i=0;i<deck.size();i++){
-			p+=deck.get(i).victoryValue(this);
-		}
-		return p;
 	}
 	
 	/**
@@ -174,7 +150,6 @@ public class Player {
 	 * de la classe {@code Game}.
 	 */
 	public List<Player> otherPlayers() {
-		return(getGame().otherPlayers(this));
 	}
 	
 	/**
@@ -188,18 +163,6 @@ public class Player {
 	 * @return la carte piochée, {@code null} si aucune carte disponible
 	 */
 	public Card drawCard() {
-		if(!draw.isEmpty()){
-			return(draw.remove(draw.size()-1));
-		}else{
-			discard.shuffle();
-			draw.addAll(discard);
-			discard.removeAll(draw);
-			if(!draw.isEmpty()){
-				return(draw.remove(draw.size()-1));
-			}else{
-				return null;
-			}
-		}
 	}
 	
 	/**
@@ -355,7 +318,6 @@ public class Player {
 			// Un seul choix possible (renvoyer cet unique élément)
 			return choiceSet.iterator().next();
 		} else {
-			Scanner sc = new Scanner(System.in);
 			String input;
 			// Lit l'entrée de l'utilisateur jusqu'à obtenir un choix valide
 			while (true) {
@@ -370,7 +332,7 @@ public class Player {
 				System.out.println(">>> " + instruction);
 				System.out.print("> ");
 				// lit l'entrée de l'utilisateur au clavier
-				input = sc.nextLine();
+				input = this.game.readLine();
 				if (choiceSet.contains(input) || (canPass && input.equals(""))){
 					// si une réponse valide est obtenue, elle est renvoyée
 					return input;
