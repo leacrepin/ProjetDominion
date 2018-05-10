@@ -101,6 +101,16 @@ public class Player {
 	}
 	
 	/**
+	 * Retourne le nombre de carte du Deck du joueur
+	 * (Utilise totalCards qui donne la CardList du deck du joueur)
+	 * 
+	 */
+	
+	public int getNbDeck(){
+		return(totalCards().size());
+	}
+	
+	/**
 	 * Incrémente le nombre d'actions du joueur
 	 * 
 	 * @param n nombre d'actions à ajouter (ce nombre peut être négatif si l'on
@@ -484,6 +494,8 @@ public class Player {
 	 * Les compteurs d'actions et achats sont mis à 1
 	 */
 	public void startTurn() {
+		actions=1;
+		buys=1;
 	}
 	
 	/**
@@ -494,6 +506,16 @@ public class Player {
 	 * - Le joueur pioche 5 cartes en main
 	 */
 	public void endTurn() {
+		actions=0;
+		money=0;
+		buys=0;
+		discard.addAll(inPlay);
+		discard.addAll(hand);
+		inPlay.clear();
+		hand.clear();
+		for(int i=0; i<5 ; i++){
+			hand.add(draw.remove(0));
+		}
 	}
 	
 	/**
