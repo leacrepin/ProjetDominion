@@ -15,7 +15,10 @@ public class Mine extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		if(!p.getTreasureCards().isEmpty()) {
+			// TODO écarter une carte trésor au choix, puis, si succès :
+			// TODO prendre une carte au trésor où {coutNouvelleCarte est entre coutAncienneCarte & coutAncienneCarte+3}
+			// TODO l'ajouter à la main
+		}
 	}
 }

@@ -15,9 +15,12 @@ public class Library extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Possibilité de mettre les cartes actions de côté / defausse
 		for(int i = 0; i < 7; i++) {
-			p.drawCard();
+			Card drawn = p.drawCard();
+			//if(drawn.getClass().getName().equals(arg0)) // TODO
+			
 		}
+		// TODO Possibilité de mettre les cartes actions de côté / defausse
+		
 	}
 }

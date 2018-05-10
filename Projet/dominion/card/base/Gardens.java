@@ -15,7 +15,7 @@ public class Gardens extends VictoryCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		// TODO ajouter this.victoryValue() aux PV du joueur p
 		
 	}
 

@@ -219,6 +219,9 @@ public class Player {
 		}
 	}
 	
+	// TODO discardCard() (défausse une carte)
+	// TODO throwCard() (écarte une carte (poubelle, défausse commune))
+	
 	/**
 	 * Renvoie une représentation de l'état du joueur sous forme d'une chaîne
 	 * de caractères.
@@ -245,7 +248,7 @@ public class Player {
 		CardList a = new CardList();
 		for(int i=0;i<hand.size();i++){
 			List<CardType> listeDesTypes = hand.get(i).getTypes();
-			if(listeDesTypes.contains("TreasureCard")){
+			if(listeDesTypes.contains("TreasureCard")){ // TODO je pense que ça marche pas, ça demande un 'objet' -guillaume-
 				a.add(hand.get(i));
 			}
 		}
@@ -259,7 +262,7 @@ public class Player {
 		CardList a = new CardList();
 		for(int i=0;i<hand.size();i++){
 			List<CardType> listeDesTypes = hand.get(i).getTypes();
-			if(listeDesTypes.contains("ActionCard")){
+			if(listeDesTypes.contains("ActionCard")){ // TODO je pense que ça marche pas, ça demande un 'objet' -guillaume-
 				a.add(hand.get(i));
 			}
 		}
@@ -273,7 +276,7 @@ public class Player {
 		CardList a = new CardList();
 		for(int i=0;i<hand.size();i++){
 			List<CardType> listeDesTypes = hand.get(i).getTypes();
-			if(listeDesTypes.contains("VictoryCard")){
+			if(listeDesTypes.contains("VictoryCard")){ // TODO je pense que ça marche pas, ça demande un 'objet' -guillaume-
 				a.add(hand.get(i));
 			}
 		}
@@ -553,11 +556,11 @@ public class Player {
 	 * du joueur
 	 */
 	public void playTurn() {
-		//Pr�paration
+		//Préparation
 		startTurn();
 		
 		//Action
-		boolean arretForc� = false;
+		boolean arretForce = false;
 		//while(!arretForce && actions!=0){
 			
 		//}

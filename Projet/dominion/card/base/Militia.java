@@ -16,7 +16,12 @@ public class Militia extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO défausse des adversaires jusqu'à ncCard <= 3
+		// TODO défausse des adversaires jusqu'à nbCard <= 3
+		for(Player op : p.otherPlayers()) {
+			while(op.cardsInHand().size()>3) {
+				// "op.discardCard()"
+			}
+		}
 		p.incrementMoney(2);
 		
 	}
