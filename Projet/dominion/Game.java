@@ -2,6 +2,15 @@ package dominion;
 import java.util.*;
 import dominion.card.*;
 import dominion.card.common.*;
+import tp.CardList;
+import tp.Copper;
+import tp.Curse;
+import tp.Duchy;
+import tp.Estate;
+import tp.Gold;
+import tp.Player;
+import tp.Province;
+import tp.Silver;
 
 /**
  * Class représentant une partie de Dominion
@@ -51,7 +60,55 @@ public class Game {
 	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
-	}
+		//Initialisation
+				trashedCards=new CardList();
+				currentPlayerIndex=0;
+				
+				//Liste des joueurs
+				this.players=new Player[playerNames.length];
+				for(int i=0;i<playerNames.length;i++){
+					this.players[i]=new Player(playerNames[i],this);
+				}
+				
+				
+				
+				//Liste des cartes
+				this.supplyStacks=kingdomStacks;
+				CardList e=new CardList();
+				
+				//Ajout des coppers
+				for(int i=0;i<60;i++){
+					e.add(new Copper());
+				}
+				//Ajout des silvers
+				for(int i=0;i<40;i++){
+					e.add(new Silver());
+				}
+				//Ajout des silvers
+				for(int i=0;i<30;i++){
+					e.add(new Gold());
+				}
+				//Estate, Duchy et Province pour 2 joueurs
+				if(playerNames.length==2){
+					for(int i=0;i<8;i++){
+						e.add(new Estate());
+						e.add(new Duchy());
+						e.add(new Province());
+					}
+				}else{//3 et 4 joueurs
+					for(int i=0;i<12;i++){
+						e.add(new Estate());
+						e.add(new Duchy());
+						e.add(new Province());
+					}
+				}
+				//Cartes curse
+				for(int i=0;i<10*playerNames.length-1;i++){
+					e.add(new Curse());
+				}
+				
+				supplyStacks.add(e);
+			}
 	
 	/**
 	 * Renvoie le joueur correspondant à l'indice passé en argument
@@ -61,12 +118,14 @@ public class Game {
 	 * @param index indice dans le tableau des joueurs du joueur à renvoyer
 	 */
 	public Player getPlayer(int index) {
+		return(players[index]);
 	}
 	
 	/**
 	 * Renvoie le nombre de joueurs participant à la partie
 	 */
 	public int numberOfPlayers() {
+		return(players.length);
 	}
 	
 	/**
@@ -74,6 +133,12 @@ public class Game {
 	 * joueurs, ou -1 si le joueur n'est pas dans le tableau.
 	 */
 	private int indexOfPlayer(Player p) {
+		for(int i=0;i<numberOfPlayers();i++){
+			if(p.equals(players[i])){
+				return(i);
+			}
+		}
+		return(-1);
 	}
 	
 	/**
@@ -89,6 +154,11 @@ public class Game {
 	 * premier).
 	 */
 	public List<Player> otherPlayers(Player p) {
+		List<Player> a=new ArrayList<Player>();
+		for(int i=(indexOfPlayer(p)+1)%numberOfPlayers();!players[i].equals(p);i=(i+1)%numberOfPlayers()){
+			a.add(players[i]);
+		}
+		return(a);
 	}
 	
 	/**
@@ -99,6 +169,13 @@ public class Game {
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
 	public CardList availableSupplyCards() {
+		CardList a=new CardList();
+		for(int i=0;i<supplyStacks.size();i++){
+			if(supplyStacks.get(i)!=null){
+				a.add(supplyStacks.get(i).get(0));
+			}
+		}
+		return(a);
 	}
 	
 	/**
