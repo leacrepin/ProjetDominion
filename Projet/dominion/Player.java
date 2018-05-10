@@ -92,6 +92,14 @@ public class Player {
 		return(game);
 	}
 	
+	public void setName(String nom) {
+		name=nom;
+	}
+	
+	public void setGame(Game jeu) {
+		game=jeu;
+	}
+	
 	/**
 	 * Incrémente le nombre d'actions du joueur
 	 * 
@@ -99,7 +107,7 @@ public class Player {
 	 * souhaite diminuer le nombre d'actions)
 	 */
 	public void incrementActions(int n) {
-		actions=actions+n;
+		actions+=n;
 	}
 	
 	/**
@@ -109,7 +117,7 @@ public class Player {
 	 * souhaite diminuer le nombre de pièces)
 	 */
 	public void incrementMoney(int n) {
-		money=money+n;
+		money+=n;
 	}
 	
 	/**
@@ -224,18 +232,42 @@ public class Player {
 	 * Renvoie la liste de toutes les cartes Trésor dans la main du joueur
 	 */
 	public CardList getTreasureCards() {
+		CardList a = new CardList();
+		for(int i=0;i<hand.size();i++){
+			List<CardType> listeDesTypes = hand.get(i).getTypes();
+			if(listeDesTypes.contains("TreasureCard")){
+				a.add(hand.get(i));
+			}
+		}
+		return a;
 	}
 	
 	/**
 	 * Renvoie la liste de toutes les cartes Action dans la main du joueur
 	 */
 	public CardList getActionCards() {
+		CardList a = new CardList();
+		for(int i=0;i<hand.size();i++){
+			List<CardType> listeDesTypes = hand.get(i).getTypes();
+			if(listeDesTypes.contains("ActionCard")){
+				a.add(hand.get(i));
+			}
+		}
+		return a;
 	}
 	
 	/**
 	 * Renvoie la liste de toutes les cartes Victoire dans la main du joueur
 	 */
 	public CardList getVictoryCards() {
+		CardList a = new CardList();
+		for(int i=0;i<hand.size();i++){
+			List<CardType> listeDesTypes = hand.get(i).getTypes();
+			if(listeDesTypes.contains("VictoryCard")){
+				a.add(hand.get(i));
+			}
+		}
+		return a;
 	}
 	
 	/**
@@ -249,6 +281,9 @@ public class Player {
 	 * {@code inPlay} et exécute la méthode {@code play(Player p)} de la carte.
 	 */
 	public void playCard(Card c) {
+		hand.remove(c);
+		inPlay.add(c);
+		c.play(this);
 	}
 	
 	/**
@@ -262,6 +297,9 @@ public class Player {
 	 * fait rien.
 	 */
 	public void playCard(String cardName) {
+		if(hand.getCard(cardName)!=null){
+			playCard(hand.getCard(cardName));
+		}
 	}
 	
 	/**
@@ -274,6 +312,9 @@ public class Player {
 	 * emplacement précédent au préalable.
 	 */
 	public void gain(Card c) {
+		if(c!=null){
+			discard.add(c);
+		}
 	}
 	
 	/**
@@ -286,6 +327,11 @@ public class Player {
 	 * null} si aucune carte n'a été prise dans la réserve.
 	 */
 	public Card gain(String cardName) {
+		Card carte = game.getFromSupply(cardName);
+		if(carte!=null){
+			discard.add(game.removeFromSupply(cardName));
+		}
+		return carte;
 	}
 	
 	/**
@@ -303,6 +349,18 @@ public class Player {
 	 * lieu
 	 */
 	public Card buyCard(String cardName) {
+		Card carte = game.getFromSupply(cardName);
+		if(carte!=null){
+			if(carte.getCost()<money){
+				incrementMoney(-carte.getCost());
+				incrementBuys(-1);
+				discard.add(game.removeFromSupply(cardName));
+			}else{
+				carte=null;
+			}
+			
+		}
+		return carte;
 	}
 	
 	/**
