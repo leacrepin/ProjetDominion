@@ -2,15 +2,6 @@ package dominion;
 import java.util.*;
 import dominion.card.*;
 import dominion.card.common.*;
-import tp.CardList;
-import tp.Copper;
-import tp.Curse;
-import tp.Duchy;
-import tp.Estate;
-import tp.Gold;
-import tp.Player;
-import tp.Province;
-import tp.Silver;
 
 /**
  * Class représentant une partie de Dominion
