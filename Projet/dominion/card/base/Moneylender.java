@@ -16,7 +16,9 @@ public class Moneylender extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		// TODO vérifier si une carte copper est dans la main
+		System.out.println("Voulez-vous écarter une carte 'copper' contre 3 pièces temporaires ?");
+			// TODO récupérer l'avis de l'utilisateur
+			Card copper = p.cardsInHand().remove("Copper");
 	}
 }

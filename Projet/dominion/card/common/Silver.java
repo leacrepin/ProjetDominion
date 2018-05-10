@@ -16,7 +16,6 @@ public class Silver extends TreasureCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.incrementMoney(this.treasureValue());
 	}
 }

@@ -17,6 +17,7 @@ public class Chancellor extends ActionCard {
 	@Override
 	public void play(Player p) {
 		// TODO Auto-generated method stub
+		p.incrementMoney(2);
 		
 	}
 }

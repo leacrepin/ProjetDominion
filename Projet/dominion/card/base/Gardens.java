@@ -18,4 +18,9 @@ public class Gardens extends VictoryCard {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int victoryValue(Player p) {
+		return p.getNbDeck()/10;
+	}
 }

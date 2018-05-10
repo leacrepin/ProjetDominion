@@ -17,7 +17,8 @@ public class Festival extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.incrementActions(2);
+		p.incrementBuys(1);
+		p.incrementMoney(2);
 	}
 }

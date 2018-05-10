@@ -18,6 +18,6 @@ public class CouncilRoom extends ActionCard {
 	@Override
 	public void play(Player p) {
 		// TODO Auto-generated method stub
-		
+		p.incrementBuys(1);
 	}
 }

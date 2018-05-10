@@ -16,7 +16,8 @@ public class Militia extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		// TODO défausse des adversaires jusqu'à ncCard <= 3
+		p.incrementMoney(2);
 		
 	}
 }

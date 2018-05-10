@@ -16,7 +16,8 @@ public class Moat extends ReactionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		// TODO protection contre attaque
+		p.drawCard();
+		p.drawCard();
 	}
 }

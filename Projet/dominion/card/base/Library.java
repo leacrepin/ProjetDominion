@@ -15,7 +15,9 @@ public class Library extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		// TODO Possibilité de mettre les cartes actions de côté / defausse
+		for(int i = 0; i < 7; i++) {
+			p.drawCard();
+		}
 	}
 }

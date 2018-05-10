@@ -18,6 +18,7 @@ public class Cellar extends ActionCard {
 	@Override
 	public void play(Player p) {
 		// TODO Auto-generated method stub
+		p.incrementActions(1);
 		
 	}
 }
