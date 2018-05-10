@@ -11,4 +11,7 @@ import dominion.card.*;
  * +2 Pièces.
  */
 public class Festival extends ActionCard {
+	public Festival() {
+		super("Festival", 5);
+	}
 }

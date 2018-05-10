@@ -21,7 +21,9 @@ public abstract class Card {
 	 * @param name le nom de la carte
 	 * @param cost le coût de la carte
 	 */
-	public Card(String name, int cost) {this.name=name;this.cost=cost;
+	public Card(String name, int cost) {
+		this.name=name;
+		this.cost=cost;
 	}
 	
 	/**
