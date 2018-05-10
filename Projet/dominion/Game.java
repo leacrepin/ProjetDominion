@@ -256,7 +256,7 @@ public class Game {
 		//3 piles ou plus de la réserve est vide
 		int nb=0;
 		for(int i=0;i<supplyStacks.size();i++){
-			if(supplyStacks.get(i).isEmpty()){
+			if(supplyStacks.get(i)!=null && supplyStacks.get(i).isEmpty()){
 				nb++;
 			}
 			if(nb==3){
@@ -266,7 +266,13 @@ public class Game {
 		
 		//La pile de Provinces de la réserve est vide
 		
-		//A FAIRE AVEC PROVINCE
+		
+		for(int i=0;i<supplyStacks.size();i++){
+			if(supplyStacks.get(i)!=null && !supplyStacks.get(i).isEmpty() && supplyStacks.get(i).getCard("Province")!=null){
+				return false;
+			}
+		}
+		return true;
 		
 	}
 	
