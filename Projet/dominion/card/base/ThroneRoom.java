@@ -10,4 +10,13 @@ import dominion.card.*;
  * Jouez-la deux fois.
  */
 public class ThroneRoom extends ActionCard {
+	public ThroneRoom() {
+		super("Throne Room", 4);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

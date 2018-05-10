@@ -12,4 +12,13 @@ import dominion.card.*;
  * +1 Pièce.
  */
 public class Market extends ActionCard {
+	public Market() {
+		super("Market", 5);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

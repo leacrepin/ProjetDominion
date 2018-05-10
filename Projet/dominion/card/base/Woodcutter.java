@@ -10,4 +10,13 @@ import dominion.card.*;
  * +2 Pièces.
  */
 public class Woodcutter extends ActionCard {
+	public Woodcutter() {
+		super("Woodcutter", 3);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

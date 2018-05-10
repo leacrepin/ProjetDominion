@@ -14,4 +14,10 @@ public class Festival extends ActionCard {
 	public Festival() {
 		super("Festival", 5);
 	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

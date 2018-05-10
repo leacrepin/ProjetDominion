@@ -10,4 +10,13 @@ import dominion.card.*;
  * Dans ce cas, +3 Pièces.
  */
 public class Moneylender extends ActionCard {
+	public Moneylender() {
+		super("Money Lender", 4);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

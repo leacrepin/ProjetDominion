@@ -10,4 +10,13 @@ import dominion.card.*;
  * +1 Action.
  */
 public class Laboratory extends ActionCard {
+	public Laboratory() {
+		super("Laboratory", 5);
+	}
+
+	@Override
+	public void play(Player p) {
+		// TODO Auto-generated method stub
+		
+	}
 }
