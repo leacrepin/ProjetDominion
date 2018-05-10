@@ -206,13 +206,13 @@ public class Player {
 	 */
 	public Card drawCard() {
 		if(!draw.isEmpty()){
-			return(draw.remove(draw.size()-1));
+			return(draw.remove(0));
 		}else{
 			discard.shuffle();
 			draw.addAll(discard);
-			discard.removeAll(draw);
+			discard.clear();
 			if(!draw.isEmpty()){
-				return(draw.remove(draw.size()-1));
+				return(draw.remove(0));
 			}else{
 				return null;
 			}
@@ -518,6 +518,13 @@ public class Player {
 		}
 	}
 	
+	private static String demanderChoix(){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Veuillez choisir le nom d'une carte Action (Vide sinon):");
+		String str = sc.nextLine();
+		return(str);
+	}
+	
 	/**
 	 * ExÃ©cute le tour d'un joueur
 	 * 
@@ -546,5 +553,13 @@ public class Player {
 	 * du joueur
 	 */
 	public void playTurn() {
+		//Préparation
+		startTurn();
+		
+		//Action
+		boolean arretForcé = false;
+		//while(!arretForce && actions!=0){
+			
+		//}
 	}
 }
