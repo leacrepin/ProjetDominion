@@ -2,15 +2,6 @@ package dominion;
 import java.util.*;
 import dominion.card.*;
 import dominion.card.common.*;
-import tp.CardList;
-import tp.Copper;
-import tp.Curse;
-import tp.Duchy;
-import tp.Estate;
-import tp.Gold;
-import tp.Player;
-import tp.Province;
-import tp.Silver;
 
 /**
  * Class représentant une partie de Dominion
@@ -168,10 +159,10 @@ public class Game {
 	 * @return une liste de cartes contenant la première carte de chaque pile 
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
-	public CardList availableSupplyCards() {
+	public CardList availableSupplyCards() {// A REFAIRE AVEC ROYAUME COMMUNES
 		CardList a=new CardList();
 		for(int i=0;i<supplyStacks.size();i++){
-			if(supplyStacks.get(i)!=null){
+			if(supplyStacks.get(i)!=null && !supplyStacks.get(i).isEmpty()){
 				a.add(supplyStacks.get(i).get(0));
 			}
 		}
@@ -213,6 +204,14 @@ public class Game {
 	 * ne correspond
 	 */
 	public Card getFromSupply(String cardName) {
+		for(int i=0;i<supplyStacks.size();i++){
+			if(supplyStacks.get(i)!=null){
+				if(supplyStacks.get(i).getCard(cardName)!=null){
+					return(supplyStacks.get(i).getCard(cardName));
+				}
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -223,6 +222,14 @@ public class Game {
 	 * ne correspond au nom passé en argument
 	 */
 	public Card removeFromSupply(String cardName) {
+		for(int i=0;i<supplyStacks.size();i++){
+			if(supplyStacks.get(i)!=null){
+				if(supplyStacks.get(i).getCard(cardName)!=null){
+					return(supplyStacks.get(i).remove(cardName));
+				}
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -237,6 +244,27 @@ public class Game {
 	 * c'est que la partie est terminée)
 	 */
 	public boolean isFinished() {
+		//3 piles ou plus de la r�serve est vide
+		int nb=0;
+		for(int i=0;i<supplyStacks.size();i++){
+			if(supplyStacks.get(i)!=null && supplyStacks.get(i).isEmpty()){
+				nb++;
+			}
+			if(nb==3){
+				return true;
+			}
+		}
+		
+		//La pile de Provinces de la r�serve est vide
+		
+		
+		for(int i=0;i<supplyStacks.size();i++){
+			if(supplyStacks.get(i)!=null && !supplyStacks.get(i).isEmpty() && supplyStacks.get(i).getCard("Province")!=null){
+				return false;
+			}
+		}
+		return true;
+		
 	}
 	
 	/**
