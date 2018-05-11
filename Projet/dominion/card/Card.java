@@ -55,6 +55,28 @@ public abstract class Card {
 	 */
 	public List<CardType> getTypes() {
 		List<CardType> a = new ArrayList<CardType>();
+		String classe = this.getClass().toString();
+		String[] listedesclasses = classe.split(".");
+		for(int i=0;i<listedesclasses.length;i++){
+			if(listedesclasses[i]=="TreasureCard"){
+				a.add(CardType.Treasure);
+			}
+			if(listedesclasses[i]=="CurseCard"){
+				a.add(CardType.Curse);
+			}
+			if(listedesclasses[i]=="ReactionCard"){
+				a.add(CardType.Reaction);
+			}
+			if(listedesclasses[i]=="VictoryCard"){
+				a.add(CardType.Victory);
+			}
+			if(listedesclasses[i]=="AttackCard"){
+				a.add(CardType.Attack);
+			}
+			if(listedesclasses[i]=="ActionCard"){
+				a.add(CardType.Action);
+			}
+		}
 		return(a);
 	}
 	
