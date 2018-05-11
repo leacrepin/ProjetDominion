@@ -15,7 +15,17 @@ public class Adventurer extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		Card drawn = p.drawCard();
+		int i = 0;
+		while(drawn!=null && i < 2) {
+			List<CardType> listeDesTypes = drawn.getTypes();
+			if(listeDesTypes.contains(CardType.Treasure)) {
+				i++;
+			} else {
+				p.discardCard(drawn);
+			}
+			drawn = p.drawCard();
+		}
 		
 	}
 }

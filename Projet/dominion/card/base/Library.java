@@ -15,12 +15,23 @@ public class Library extends ActionCard {
 
 	@Override
 	public void play(Player p) {
+		CardList misesDeCote = new CardList();
+		boolean confirmation;
 		for(int i = 0; i < 7; i++) {
 			Card drawn = p.drawCard();
-			//if(drawn.getClass().getName().equals(arg0)) // TODO
-			
+			List<CardType> listeDesTypes = drawn.getTypes();
+			if(listeDesTypes.contains(CardType.Action)) {
+				System.out.println("Voulez-vous mettre cette carte Action de côté ?");
+				confirmation = Player.confirmer();
+				if(confirmation) {
+					misesDeCote.add(drawn);
+					i--;
+				}
+			}
 		}
-		// TODO Possibilité de mettre les cartes actions de côté / defausse
+		for(Card c : misesDeCote) {
+			p.discardCard(c);
+		}
 		
 	}
 }

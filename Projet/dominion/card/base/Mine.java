@@ -19,6 +19,7 @@ public class Mine extends ActionCard {
 			// TODO écarter une carte trésor au choix, puis, si succès :
 			// TODO prendre une carte au trésor où {coutNouvelleCarte est entre coutAncienneCarte & coutAncienneCarte+3}
 			// TODO l'ajouter à la main
+			
 		}
 	}
 }
