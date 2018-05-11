@@ -100,6 +100,14 @@ public class Player {
 		game=jeu;
 	}
 	
+	/** 
+	 * Ajoute dans la defausse une carte (utilisé pour bibliotheque etc)
+	 * @param Card
+	*/
+	public void discardCard(Card carte){
+		discard.add(carte);
+	}
+	
 	/**
 	 * Retourne le nombre de carte du Deck du joueur
 	 * (Utilise totalCards qui donne la CardList du deck du joueur)
@@ -219,9 +227,6 @@ public class Player {
 		}
 	}
 	
-	// TODO discardCard() (défausse une carte)
-	// TODO throwCard() (écarte une carte (poubelle, défausse commune))
-	
 	/**
 	 * Renvoie une représentation de l'état du joueur sous forme d'une chaîne
 	 * de caractères.
@@ -248,7 +253,7 @@ public class Player {
 		CardList a = new CardList();
 		for(int i=0;i<hand.size();i++){
 			List<CardType> listeDesTypes = hand.get(i).getTypes();
-			if(listeDesTypes.contains("TreasureCard")){ // TODO je pense que ça marche pas, ça demande un 'objet' -guillaume-
+			if(listeDesTypes.contains(CardType.Treasure)){
 				a.add(hand.get(i));
 			}
 		}
@@ -262,8 +267,7 @@ public class Player {
 		CardList a = new CardList();
 		for(int i=0;i<hand.size();i++){
 			List<CardType> listeDesTypes = hand.get(i).getTypes();
-			if(listeDesTypes.contains("ActionCard")){ // TODO je pense que ça marche pas, ça demande un 'objet' -guillaume-
-				a.add(hand.get(i));
+			if(listeDesTypes.contains(CardType.Action)){
 			}
 		}
 		return a;
@@ -276,7 +280,7 @@ public class Player {
 		CardList a = new CardList();
 		for(int i=0;i<hand.size();i++){
 			List<CardType> listeDesTypes = hand.get(i).getTypes();
-			if(listeDesTypes.contains("VictoryCard")){ // TODO je pense que ça marche pas, ça demande un 'objet' -guillaume-
+			if(listeDesTypes.contains(CardType.Victory)){
 				a.add(hand.get(i));
 			}
 		}
@@ -310,7 +314,8 @@ public class Player {
 	 * fait rien.
 	 */
 	public void playCard(String cardName) {
-		if(hand.getCard(cardName)!=null){
+		if(hand.getCard(cardName)!=null && actions>0){
+			incrementActions(-1);
 			playCard(hand.getCard(cardName));
 		}
 	}
@@ -523,9 +528,21 @@ public class Player {
 	
 	private static String demanderChoix(){
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez choisir le nom d'une carte Action (Vide sinon):");
+		System.out.println("Veuillez choisir le nom d'une carte (Vide sinon):");
 		String str = sc.nextLine();
 		return(str);
+	}
+	
+	private static boolean confirmer(){
+		Scanner sc = new Scanner(System.in);
+		String str = sc.nextLine();
+		if(str=="y"){
+			return(true);
+		}
+		if(str=="n"){
+			return(false);
+		}
+		return(confirmer());
 	}
 	
 	/**
@@ -560,9 +577,42 @@ public class Player {
 		startTurn();
 		
 		//Action
+		System.out.println("Action");
 		boolean arretForce = false;
-		//while(!arretForce && actions!=0){
-			
-		//}
+		while(!arretForce && actions!=0 && !getActionCards().isEmpty()){
+			System.out.println("Vous avez en nb d'actions: "+actions);
+			System.out.println("ActionCards: "+getActionCards().toString());
+			String reponse = demanderChoix();
+			if(reponse==""){
+				arretForce=true;
+			}else{
+				playCard(reponse);
+			}
+		}
+		
+		
+		//Tresor
+		CardList cartestresor = getTreasureCards();
+		for(int i=0;i<cartestresor.size();i++){
+			playCard(cartestresor.get(i).getName());
+		}
+		
+		//Achat
+		System.out.println("Achat");
+		arretForce = false;
+		while(!arretForce && buys!=0 && !game.availableSupplyCards().isEmpty()){
+			System.out.println("Vous avez en nb d'actions achat: "+buys);
+			System.out.println("Argent: "+money);
+			System.out.println("Cartes en boutique: "+game.availableSupplyCards().toString());
+			String reponse = demanderChoix();
+			if(reponse==""){
+				arretForce=true;
+			}else{
+				buyCard(reponse);
+			}
+		}
+		
+		//Fin
+		endTurn();
 	}
 }

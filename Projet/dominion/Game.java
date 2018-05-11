@@ -159,7 +159,7 @@ public class Game {
 	 * @return une liste de cartes contenant la premi√®re carte de chaque pile 
 	 * non-vide de la r√©serve (cartes royaume et cartes communes)
 	 */
-	public CardList availableSupplyCards() {// A REFAIRE AVEC ROYAUME COMMUNES
+	public CardList availableSupplyCards() {// TODO:A REFAIRE AVEC ROYAUME COMMUNES
 		CardList a=new CardList();
 		for(int i=0;i<supplyStacks.size();i++){
 			if(supplyStacks.get(i)!=null && !supplyStacks.get(i).isEmpty()){
@@ -244,7 +244,7 @@ public class Game {
 	 * c'est que la partie est termin√©e)
 	 */
 	public boolean isFinished() {
-		//3 piles ou plus de la rÈserve est vide
+		//3 piles ou plus de la rÔøΩserve est vide
 		int nb=0;
 		for(int i=0;i<supplyStacks.size();i++){
 			if(supplyStacks.get(i)!=null && supplyStacks.get(i).isEmpty()){
@@ -255,7 +255,7 @@ public class Game {
 			}
 		}
 		
-		//La pile de Provinces de la rÈserve est vide
+		//La pile de Provinces de la rÔøΩserve est vide
 		
 		
 		for(int i=0;i<supplyStacks.size();i++){
