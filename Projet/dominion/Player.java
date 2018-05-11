@@ -526,14 +526,14 @@ public class Player {
 		}
 	}
 	
-	private static String demanderChoix(){
+	public static String demanderChoix(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez choisir le nom d'une carte (Vide sinon):");
 		String str = sc.nextLine();
 		return(str);
 	}
 	
-	private static boolean confirmer(){
+	public static boolean confirmer(){
 		Scanner sc = new Scanner(System.in);
 		String str = sc.nextLine();
 		if(str=="y"){
