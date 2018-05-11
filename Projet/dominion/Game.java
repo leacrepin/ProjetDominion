@@ -101,6 +101,15 @@ public class Game {
 				supplyStacks.add(e);
 			}
 	
+	/** 
+	 * Ajoute dans la poubelle une carte
+	 * @param Card
+	*/
+	public void throwCard(Card carte){
+		trashedCards.add(carte);
+	}
+	
+	
 	/**
 	 * Renvoie le joueur correspondant à l'indice passé en argument
 	 * On suppose {@code index} est un indice valide du tableau 
