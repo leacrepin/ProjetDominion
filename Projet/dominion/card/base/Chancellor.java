@@ -16,13 +16,13 @@ public class Chancellor extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
 		p.incrementMoney(2);
 		List<String> choices = Arrays.asList("y", "n");
-		String reponse = p.choose("Voulez-vous placer votre pioche dans la défausse (y/n) ?", choices, false);
-		if(reponse=="y") {
-			// CardList deck = p.getDeck();
-			// TODO Que faut-il faire ? x)
+		if(p.choose("Voulez-vous placer votre pioche dans la défausse (y/n) ?", choices, false)=="y") {
+			CardList draw = p.getDraw();
+			for(Card c : draw) {
+				p.discardCard(draw.remove(c.getName()));
+			}
 		}
 		
 	}

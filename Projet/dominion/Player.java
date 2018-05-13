@@ -92,6 +92,10 @@ public class Player {
 		return(game);
 	}
 	
+	public CardList getDraw() {
+		return draw;
+	}
+	
 	public void setName(String nom) {
 		name=nom;
 	}
