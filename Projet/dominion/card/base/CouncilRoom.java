@@ -17,7 +17,13 @@ public class CouncilRoom extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		for(int i = 0; i < 4; i++) {
+			p.drawCard();
+		}
 		p.incrementBuys(1);
+		List<Player> players = p.otherPlayers();
+		for(Player pl : players) {
+			pl.drawCard();
+		}
 	}
 }

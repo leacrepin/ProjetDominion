@@ -1,5 +1,4 @@
 package dominion.card.base;
-import java.util.*;
 import dominion.*;
 import dominion.card.*;
 
@@ -15,7 +14,13 @@ public class Workshop extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		CardList supply = p.getGame().availableSupplyCards();
+		CardList achats = new CardList();
+		for(Card carte : supply) {
+			if(carte.getCost()<=4) {
+				achats.add(carte);
+			}
+		}
+		p.gain(p.chooseCard("Entrez le nom d'une carte que vous voulez recevoir :", achats, false));	
 	}
 }

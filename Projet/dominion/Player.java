@@ -101,7 +101,7 @@ public class Player {
 	}
 	
 	/** 
-	 * Ajoute dans la defausse une carte (utilisé pour bibliotheque etc)
+	 * Ajoute dans la defausse une carte
 	 * @param Card
 	*/
 	public void discardCard(Card carte){
@@ -109,11 +109,10 @@ public class Player {
 	}
 	
 	/**
-	 * Retourne le nombre de carte du Deck du joueur
+	 * @return le nombre de carte du Deck du joueur
 	 * (Utilise totalCards qui donne la CardList du deck du joueur)
 	 * 
 	 */
-	
 	public int getNbDeck(){
 		return(totalCards().size());
 	}
@@ -225,6 +224,15 @@ public class Player {
 				return null;
 			}
 		}
+	}
+	
+	/**
+	 * Ajoute une carte à la pioche (utilisé pour Bureaucrat par exemple)
+	 * @param une carte {@code Card}
+	 */
+	public Card addToDraw(Card carte){
+		//TODO
+		return null;
 	}
 	
 	/**
@@ -526,6 +534,8 @@ public class Player {
 		}
 	}
 	
+	
+	// TODO en fait ces deux méthodes sont comprises (en mieux) dans choose() :/
 	public static String demanderChoix(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Veuillez choisir le nom d'une carte (Vide sinon):");

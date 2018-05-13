@@ -1,5 +1,4 @@
 package dominion.card.base;
-import java.util.*;
 import dominion.*;
 import dominion.card.*;
 
@@ -15,7 +14,13 @@ public class Thief extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		for(Player pl : p.otherPlayers()) {
+			CardList devoilees = new CardList();
+			devoilees.add(pl.drawCard());
+			devoilees.add(pl.drawCard());
+			// TODO récupérer ou écarter une carte trésor si 'p' le souhaite
+			// TODO défausser ce qui reste
+		}
 		
 	}
 }

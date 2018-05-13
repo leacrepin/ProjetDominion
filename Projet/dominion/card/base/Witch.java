@@ -1,5 +1,4 @@
 package dominion.card.base;
-import java.util.*;
 import dominion.*;
 import dominion.card.*;
 
@@ -16,7 +15,10 @@ public class Witch extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.drawCard();
+		p.drawCard();
+		for(Player pl : p.otherPlayers()) {
+			pl.gain("Curse");
+		}
 	}
 }

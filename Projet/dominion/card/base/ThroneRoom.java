@@ -1,5 +1,4 @@
 package dominion.card.base;
-import java.util.*;
 import dominion.*;
 import dominion.card.*;
 
@@ -16,7 +15,11 @@ public class ThroneRoom extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		CardList choices = p.getActionCards();
+		String cardName = p.chooseCard("Entrez le nom de la carte que vous souhaitez jouer :", choices, false);
+		Card carte = p.cardsInHand().remove(cardName);
+		carte.play(p);
+		carte.play(p);
+		p.discardCard(carte);
 	}
 }

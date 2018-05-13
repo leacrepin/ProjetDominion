@@ -17,6 +17,16 @@ public class Remodel extends ActionCard {
 	@Override
 	public void play(Player p) {
 		// TODO Auto-generated method stub
+		Card thrown = p.cardsInHand().remove(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", p.cardsInHand(), false));
+		int cost = thrown.getCost() + 2;
+		p.getGame().throwCard(thrown);
+		CardList achats = p.getGame().availableSupplyCards();
+		for(Card c : achats) {
+			if(c.getCost()>cost) {
+				achats.remove(c);
+			}
+		}
+		p.gain(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", achats, false)); //TODO canPass ???
 		
 	}
 }

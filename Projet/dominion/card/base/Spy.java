@@ -17,7 +17,9 @@ public class Spy extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		p.drawCard();
+		p.incrementActions(1);
+		// TODO dévoiler = ?
 		
 	}
 }

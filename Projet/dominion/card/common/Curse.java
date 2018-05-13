@@ -16,7 +16,6 @@ public class Curse extends CurseCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
 		
 	}
 }

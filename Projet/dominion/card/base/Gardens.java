@@ -14,13 +14,12 @@ public class Gardens extends VictoryCard {
 	}
 
 	@Override
-	public void play(Player p) {
-		// TODO ajouter this.victoryValue() aux PV du joueur p
-		
-	}
-
-	@Override
 	public int victoryValue(Player p) {
 		return p.getNbDeck()/10;
 	}
+	
+	@Override
+	public void play(Player p) {
+		
+	}	
 }

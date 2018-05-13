@@ -1,5 +1,4 @@
 package dominion.card.base;
-import java.util.*;
 import dominion.*;
 import dominion.card.*;
 
@@ -15,7 +14,8 @@ public class Smithy extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < 3; i++) {
+			p.drawCard();
+		}
 	}
 }

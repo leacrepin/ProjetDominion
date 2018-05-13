@@ -1,4 +1,7 @@
 package dominion.card.base;
+
+import java.util.List;
+
 import dominion.*;
 import dominion.card.*;
 
@@ -15,7 +18,14 @@ public class Bureaucrat extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		p.gain("Copper");
+		p.addToDraw(p.cardsInHand().remove("Copper"));
+		List<Player> players = p.otherPlayers();
+		for(Player pl : players) {
+			if(!pl.getVictoryCards().isEmpty()) {
+				// TODO dévoiler une des cartes Victoire
+			}
+		}
 		
 	}
 }

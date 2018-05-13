@@ -17,6 +17,7 @@ public class Adventurer extends ActionCard {
 	public void play(Player p) {
 		Card drawn = p.drawCard();
 		int i = 0;
+		
 		while(drawn!=null && i < 2) {
 			List<CardType> listeDesTypes = drawn.getTypes();
 			if(listeDesTypes.contains(CardType.Treasure)) {
@@ -26,6 +27,5 @@ public class Adventurer extends ActionCard {
 			}
 			drawn = p.drawCard();
 		}
-		
 	}
 }

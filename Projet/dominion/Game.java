@@ -168,7 +168,7 @@ public class Game {
 	 * @return une liste de cartes contenant la première carte de chaque pile 
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
-	public CardList availableSupplyCards() {// TODO:A REFAIRE AVEC ROYAUME COMMUNES
+	public CardList availableSupplyCards() {// TODO A REFAIRE AVEC ROYAUME COMMUNES
 		CardList a=new CardList();
 		for(int i=0;i<supplyStacks.size();i++){
 			if(supplyStacks.get(i)!=null && !supplyStacks.get(i).isEmpty()){

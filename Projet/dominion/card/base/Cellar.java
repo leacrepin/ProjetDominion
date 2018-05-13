@@ -17,8 +17,21 @@ public class Cellar extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
+		int pioche = 0;
 		p.incrementActions(1);
+		String reponse = new String();
+		
+		do{
+			reponse = p.chooseCard("Entrez le nom des cartes que vous voulez défausser (\"\" = passer)", p.cardsInHand(), true);
+			if(reponse!="") {
+				p.discardCard(p.cardsInHand().remove(reponse));
+				pioche++;
+			}
+		}while(reponse!="" && !p.cardsInHand().isEmpty());
+		
+		for(int i = 0; i < pioche; i++) {
+			p.drawCard();
+		}
 		
 	}
 }

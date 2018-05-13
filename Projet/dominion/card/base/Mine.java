@@ -15,34 +15,18 @@ public class Mine extends ActionCard {
 	@Override
 	public void play(Player p) {
 		if(!p.getTreasureCards().isEmpty()) {
-			// écarter une carte trésor au choix, puis, si succès :
-			// TODO prendre une carte au trésor où {coutNouvelleCarte est entre coutAncienneCarte & coutAncienneCarte+3}
-			// TODO l'ajouter à la main
-			// Player.demanderChoix() renvoie une chaine potentiellement érronnée
-			String[] cartesTresor = {"Copper", "Silver", "Gold"};
-			String cartesTresorPossedees = new String("Veuillez supprimer une des cartes suivantes :");
-			String choix = new String();
-			boolean[] nums = {false, false, false};
-			for(Card c : p.cardsInHand()) {
-				for(int i = 0; i < cartesTresor.length; i++) {
-					if(c.getName()==cartesTresor[i]) {
-						nums[i] = true;
-					}
+			CardList tresors = p.getTreasureCards();
+			Card thrown = p.cardsInHand().remove(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", tresors, false));
+			int cost = thrown.getCost()+3;
+			p.getGame().throwCard(thrown);
+			CardList supply = p.getGame().availableSupplyCards();
+			CardList aRecevoir = new CardList();
+			for(Card c : supply) {
+				if(c.getTypes().contains(CardType.Treasure) && c.getCost()<=cost) {
+					aRecevoir.add(c);
 				}
 			}
-			for(int i = 0; i < nums.length; i++) {
-				if(nums[i]) {
-					cartesTresorPossedees += cartesTresor[i];
-				}
-			}
-			while((choix!=cartesTresor[0]||!nums[0])&&(choix!=cartesTresor[1]||!nums[1])&&(choix!=cartesTresor[2]||!nums[2])) {
-				System.out.println(cartesTresorPossedees);
-				choix = Player.demanderChoix();
-			}// TODO tester !!!
-			Card jetee = p.cardsInHand().remove(choix);
-			int costNew = jetee.getCost() + 3;
-			p.getGame().throwCard(jetee);
-			
+			p.gain(p.chooseCard("Entrez le nom de la carte que vous souhaitez recevoir :", aRecevoir, false)); //TODO canPass ???
 			
 		}
 	}
