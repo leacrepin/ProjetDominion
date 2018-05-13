@@ -1,5 +1,4 @@
 package dominion.card.base;
-import java.util.*;
 import dominion.*;
 import dominion.card.*;
 
@@ -16,7 +15,6 @@ public class Remodel extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO Auto-generated method stub
 		Card thrown = p.cardsInHand().remove(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", p.cardsInHand(), false));
 		int cost = thrown.getCost() + 2;
 		p.getGame().throwCard(thrown);

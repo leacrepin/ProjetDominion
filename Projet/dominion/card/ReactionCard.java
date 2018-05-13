@@ -1,6 +1,5 @@
 package dominion.card;
-import java.util.*;
-import dominion.*;
+
 
 /**
  * Les cartes Réaction
