@@ -65,7 +65,7 @@ public class Game {
 				
 				
 				//Liste des cartes
-				this.supplyStacks.addAll(kingdomStacks);
+				this.supplyStacks.addAll(kingdomStacks); //TODO bug ... ???
 				
 				
 				//Ajout des coppers
