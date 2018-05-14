@@ -22,7 +22,7 @@ public class Library extends ActionCard {
 			List<CardType> listeDesTypes = drawn.getTypes();
 			if(listeDesTypes.contains(CardType.Action)) {
 				System.out.println("Voulez-vous mettre cette carte Action de côté ?");
-				confirmation = Player.confirmer();
+				confirmation = p.confirmer();
 				if(confirmation) {
 					misesDeCote.add(drawn);
 					i--;

@@ -17,7 +17,7 @@ public class Moneylender extends ActionCard {
 	public void play(Player p) {
 		if(p.cardsInHand().getCard("copper")!=null) {
 			System.out.println("Voulez-vous écarter une carte 'copper' contre 3 pièces temporaires ?");
-			if(Player.confirmer()) {
+			if(p.confirmer()) {
 				p.getGame().throwCard(p.cardsInHand().remove("Copper"));
 				p.incrementMoney(3);
 			}

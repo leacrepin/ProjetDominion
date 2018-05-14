@@ -48,10 +48,11 @@ public class Game {
 	 * - 60 Copper
 	 * - 40 Silver
 	 * - 30 Gold
-	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
+	 * - 8 (si 2 joueurs) ou 12 (si 3 ou 4 joueurs) Estate, Duchy et Province 	 
+	 * - 10 * (n-1) Curse où n est le nombre de joueurs dans la partie
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
-		//Initialisation
+				//Initialisation
 				trashedCards=new CardList();
 				currentPlayerIndex=0;
 				
@@ -64,41 +65,57 @@ public class Game {
 				
 				
 				//Liste des cartes
-				this.supplyStacks=kingdomStacks;
-				CardList e=new CardList();
+				this.supplyStacks.addAll(kingdomStacks);
+				
 				
 				//Ajout des coppers
+				CardList coppers=new CardList();
 				for(int i=0;i<60;i++){
-					e.add(new Copper());
+					coppers.add(new Copper());
 				}
+				this.supplyStacks.add(coppers);
+				
+				
 				//Ajout des silvers
+				CardList silvers=new CardList();
 				for(int i=0;i<40;i++){
-					e.add(new Silver());
+					silvers.add(new Silver());
 				}
-				//Ajout des silvers
+				this.supplyStacks.add(silvers);
+				
+				
+				//Ajout des golds
+				CardList golds=new CardList();
 				for(int i=0;i<30;i++){
-					e.add(new Gold());
+					golds.add(new Gold());
 				}
+				this.supplyStacks.add(golds);
+				
+				
 				//Estate, Duchy et Province pour 2 joueurs
+				CardList edp=new CardList();
 				if(playerNames.length==2){
 					for(int i=0;i<8;i++){
-						e.add(new Estate());
-						e.add(new Duchy());
-						e.add(new Province());
+						edp.add(new Estate());
+						edp.add(new Duchy());
+						edp.add(new Province());
 					}
 				}else{//3 et 4 joueurs
 					for(int i=0;i<12;i++){
-						e.add(new Estate());
-						e.add(new Duchy());
-						e.add(new Province());
+						edp.add(new Estate());
+						edp.add(new Duchy());
+						edp.add(new Province());
 					}
 				}
-				//Cartes curse
-				for(int i=0;i<10*playerNames.length-1;i++){
-					e.add(new Curse());
-				}
+				this.supplyStacks.add(edp);
 				
-				supplyStacks.add(e);
+				
+				//Cartes curse
+				CardList curses=new CardList();
+				for(int i=0;i<10*(playerNames.length-1);i++){
+					curses.add(new Curse());
+				}
+				supplyStacks.add(curses);
 			}
 	
 	/** 
@@ -168,7 +185,7 @@ public class Game {
 	 * @return une liste de cartes contenant la première carte de chaque pile 
 	 * non-vide de la réserve (cartes royaume et cartes communes)
 	 */
-	public CardList availableSupplyCards() {// TODO A REFAIRE AVEC ROYAUME COMMUNES
+	public CardList availableSupplyCards() {
 		CardList a=new CardList();
 		for(int i=0;i<supplyStacks.size();i++){
 			if(supplyStacks.get(i)!=null && !supplyStacks.get(i).isEmpty()){

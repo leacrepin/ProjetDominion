@@ -235,8 +235,8 @@ public class Player {
 	 * @param une carte {@code Card}
 	 */
 	public Card addToDraw(Card carte){
-		//TODO
-		return null;
+		draw.add(carte);
+		return carte;
 	}
 	
 	/**
@@ -539,24 +539,18 @@ public class Player {
 	}
 	
 	
-	// TODO en fait ces deux méthodes sont comprises (en mieux) dans choose() :/
-	public static String demanderChoix(){
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Veuillez choisir le nom d'une carte (Vide sinon):");
-		String str = sc.nextLine();
-		return(str);
-	}
+	/**
+	 * Demande un choix (oui/non)
+	 */
 	
-	public static boolean confirmer(){
-		Scanner sc = new Scanner(System.in);
-		String str = sc.nextLine();
-		if(str=="y"){
+	public boolean confirmer(){
+		List<String> choices = Arrays.asList("y", "n");
+		String reponse = choose("(y/n)", choices, false);
+		if(!reponse.equals("y")){
 			return(true);
-		}
-		if(str=="n"){
+		}else{
 			return(false);
 		}
-		return(confirmer());
 	}
 	
 	/**
@@ -596,8 +590,8 @@ public class Player {
 		while(!arretForce && actions!=0 && !getActionCards().isEmpty()){
 			System.out.println("Vous avez en nb d'actions: "+actions);
 			System.out.println("ActionCards: "+getActionCards().toString());
-			String reponse = demanderChoix();
-			if(reponse==""){
+			String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
+			if(reponse.equals("")){
 				arretForce=true;
 			}else{
 				playCard(reponse);
@@ -618,8 +612,8 @@ public class Player {
 			System.out.println("Vous avez en nb d'actions achat: "+buys);
 			System.out.println("Argent: "+money);
 			System.out.println("Cartes en boutique: "+game.availableSupplyCards().toString());
-			String reponse = demanderChoix();
-			if(reponse==""){
+			String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);
+			if(reponse.equals("")){
 				arretForce=true;
 			}else{
 				buyCard(reponse);
