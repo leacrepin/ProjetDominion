@@ -147,6 +147,16 @@ public class Player {
 		discard.add(a);
 		return(a);
 	}
+	/**
+	 * Ajoute sur le Deck une carte retirée de la main
+	 * @param carte
+	 * @return la {@code Card} replacée sur le Deck
+	 */
+	public Card handToDeck(String carte) {
+		Card a = hand.remove(carte);
+		draw.add(a);
+		return a;
+	}
 	
 	/** 
 	 * Defausse la pioche
