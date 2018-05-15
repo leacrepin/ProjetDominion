@@ -16,6 +16,7 @@ public class Adventurer extends ActionCard {
 	@Override
 	public void play(Player p) {
 		Card drawn = p.drawCard();
+		System.out.println(drawn.getName());
 		int i = 0;
 		
 		while(drawn!=null && i < 2) {
@@ -26,6 +27,7 @@ public class Adventurer extends ActionCard {
 				p.discardCard(drawn);
 			}
 			drawn = p.drawCard();
+			System.out.println(drawn.getName());
 		}
 	}
 }

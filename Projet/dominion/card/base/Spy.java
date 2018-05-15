@@ -1,4 +1,7 @@
 package dominion.card.base;
+import java.util.Arrays;
+import java.util.List;
+
 import dominion.*;
 import dominion.card.*;
 
@@ -18,7 +21,27 @@ public class Spy extends AttackCard {
 	public void play(Player p) {
 		p.drawCard();
 		p.incrementActions(1);
-		// TODO dévoiler = ?
+		String[]choix = new String[]{"y","n"};
+		List<String> choices = Arrays.asList(choix);
+		CardList devoilees = new CardList();
+		Card devoilee;
+		List<Player> players = p.otherPlayers();
+		players.add(p);
+		for(int i = 0; i<players.size();i++) {
+			devoilee = players.get(i).drawCard();
+			players.get(i).cardsInHand().remove(devoilee);
+			devoilees.add(devoilee);
+		}
+		
+		if(p.choose("'y' pour défausser ces cartes, 'n' pour les replacer.", choices, false)=="y") {
+			for(int i = 0; i<players.size();i++) {
+				players.get(i).addToDraw(devoilees.get(i));
+			}
+		} else {
+			for(int i = 0; i<players.size();i++) {
+				players.get(i).getGame().throwCard(devoilees.get(i));
+			}
+		}
 		
 	}
 }
