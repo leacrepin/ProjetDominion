@@ -1,11 +1,16 @@
 package dominion;
 import java.util.*;
 import dominion.card.*;
+import dominion.card.base.Moneylender;
 import dominion.card.base.Village;
 import dominion.card.common.Copper;
 import dominion.card.common.Duchy;
 import dominion.card.common.Estate;
 import dominion.card.common.Province;
+import dominion.card.common.Silver;
+import test.GameProxy;
+import test.IOGame;
+import test.PlayerProxy;
 
 /**
  * Un joueur de Dominion
@@ -135,10 +140,12 @@ public class Player {
 	/** 
 	 * Ajoute dans la defausse une carte et la retire de la main
 	 * @param String
+	 * @return Card
 	*/
-	public void discardHand(String carte){
+	public Card discardHand(String carte){
 		Card a = hand.remove(carte);
 		discard.add(a);
+		return(a);
 	}
 	
 	/** 
@@ -152,10 +159,12 @@ public class Player {
 	/** 
 	 * Ajoute dans la poubelle une carte et la retire de la main
 	 * @param String
+	 * @return Card
 	*/
-	public void throwHand(String carte){
+	public Card throwHand(String carte){
 		Card a = hand.remove(carte);
 		game.throwCard(a);
+		return(a);
 	}
 	
 	/**
@@ -203,7 +212,8 @@ public class Player {
 	 * éléments sont les mêmes que ceux de {@code this.hand}.
 	 */
 	public CardList cardsInHand() {
-		CardList l=new CardList(hand);
+		CardList l=new CardList();
+		l.addAll(hand);
 		return l;
 	}
 	
@@ -417,6 +427,23 @@ public class Player {
 		Card carte = game.getFromSupply(cardName);
 		if(carte!=null){
 			discard.add(game.removeFromSupply(cardName));
+		}
+		return carte;
+	}
+	
+	/**
+	 * Le joueur gagne une carte de la réserve
+	 * 
+	 * @param cardName nom de la carte à gagner. S'il existe une carte dans la 
+	 * réserve ayant ce nom, cette carte est retirée de la réserve et placée 
+	 * sur la main du joueur.
+	 * @return la carte qui a été ajoutée à la main du joueur, ou {@code 
+	 * null} si aucune carte n'a été prise dans la réserve.
+	 */
+	public Card gainHand(String cardName) {
+		Card carte = game.getFromSupply(cardName);
+		if(carte!=null){
+			hand.add(game.removeFromSupply(cardName));
 		}
 		return carte;
 	}
@@ -698,9 +725,15 @@ public class Player {
 				// Instancie et exécute une partie
 				Game g = new Game(playerNames, kingdomStacks);
 				Player paul = new Player("Paul",g);
-				CardList deck = paul.totalCards();
-				System.out.println(paul.totalCards());
-				System.out.println(paul.victoryPoints());
-				System.out.println(deck.get(0).victoryValue(paul));
+				
+				
+				//Test d'une carte
+				paul.hand.clear();
+				paul.hand.add(new Moneylender());
+				paul.hand.add(new Silver());
+				paul.hand.add(new Silver());
+				paul.playCard("Moneylender");
+				System.out.println(paul.getMoney());
+				System.out.println(paul.hand);
 	}
 }
