@@ -1,6 +1,14 @@
 package dominion.card.base;
+import java.util.Arrays;
+import java.util.List;
+
 import dominion.*;
 import dominion.card.*;
+import dominion.card.common.Copper;
+import dominion.card.common.Silver;
+import test.GameProxy;
+import test.IOGame;
+import test.PlayerProxy;
 
 /**
  * Carte Prêteur sur gages (Moneylender)
@@ -10,17 +18,15 @@ import dominion.card.*;
  */
 public class Moneylender extends ActionCard {
 	public Moneylender() {
-		super("Money Lender", 4);
+		super("Moneylender", 4);
 	}
 
 	@Override
 	public void play(Player p) {
-		if(p.cardsInHand().getCard("copper")!=null) {
-			System.out.println("Voulez-vous écarter une carte 'copper' contre 3 pièces temporaires ?");
-			if(p.confirmer()) {
-				p.getGame().throwCard(p.cardsInHand().remove("Copper"));
-				p.incrementMoney(3);
-			}
+		if(p.cardsInHand().getCard("Copper")!=null) {
+			p.throwHand("Copper");
+			p.incrementMoney(3);
 		}
 	}
+	
 }

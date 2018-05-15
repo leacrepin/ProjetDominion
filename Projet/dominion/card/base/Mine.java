@@ -5,7 +5,9 @@ import dominion.card.*;
 /**
  * Carte Mine
  * 
- * Écartez une carte Trésor de votre main. Recevez une carte Trésor coûtant jusqu'à 3 Pièces de plus ; ajoutez cette carte à votre main.
+ * Écartez une carte Trésor de votre main. 
+ * Recevez une carte Trésor coûtant jusqu'à 3 Pièces de plus ; 
+ * ajoutez cette carte à votre main.
  */
 public class Mine extends ActionCard {
 	public Mine() {
@@ -16,9 +18,9 @@ public class Mine extends ActionCard {
 	public void play(Player p) {
 		if(!p.getTreasureCards().isEmpty()) {
 			CardList tresors = p.getTreasureCards();
-			Card thrown = p.cardsInHand().remove(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", tresors, false));
+			String reponse = p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", tresors, false);
+			Card thrown = p.throwHand(reponse);
 			int cost = thrown.getCost()+3;
-			p.getGame().throwCard(thrown);
 			CardList supply = p.getGame().availableSupplyCards();
 			CardList aRecevoir = new CardList();
 			for(Card c : supply) {
@@ -26,7 +28,8 @@ public class Mine extends ActionCard {
 					aRecevoir.add(c);
 				}
 			}
-			p.gain(p.chooseCard("Entrez le nom de la carte que vous souhaitez recevoir :", aRecevoir, false)); //TODO canPass ???
+			reponse=p.chooseCard("Entrez le nom de la carte que vous souhaitez recevoir :", aRecevoir, false);
+			p.gainHand(reponse);
 			
 		}
 	}
