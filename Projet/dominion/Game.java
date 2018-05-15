@@ -53,7 +53,9 @@ public class Game {
 	 */
 	public Game(String[] playerNames, List<CardList> kingdomStacks) {
 				//Initialisation
-				trashedCards=new CardList();
+				scanner=new Scanner(System.in);
+				this.trashedCards=new CardList();
+				this.supplyStacks=new ArrayList<CardList>();
 				currentPlayerIndex=0;
 				
 				//Liste des joueurs
@@ -65,7 +67,7 @@ public class Game {
 				
 				
 				//Liste des cartes
-				this.supplyStacks.addAll(kingdomStacks); //TODO bug ... ???
+				this.supplyStacks.addAll(kingdomStacks);
 				
 				
 				//Ajout des coppers
@@ -93,21 +95,25 @@ public class Game {
 				
 				
 				//Estate, Duchy et Province pour 2 joueurs
-				CardList edp=new CardList();
+				CardList estates=new CardList();
+				CardList duchies=new CardList();
+				CardList provinces=new CardList();
 				if(playerNames.length==2){
 					for(int i=0;i<8;i++){
-						edp.add(new Estate());
-						edp.add(new Duchy());
-						edp.add(new Province());
+						estates.add(new Estate());
+						duchies.add(new Duchy());
+						provinces.add(new Province());
 					}
 				}else{//3 et 4 joueurs
 					for(int i=0;i<12;i++){
-						edp.add(new Estate());
-						edp.add(new Duchy());
-						edp.add(new Province());
+						estates.add(new Estate());
+						duchies.add(new Duchy());
+						provinces.add(new Province());
 					}
 				}
-				this.supplyStacks.add(edp);
+				this.supplyStacks.add(estates);
+				this.supplyStacks.add(duchies);
+				this.supplyStacks.add(provinces);
 				
 				
 				//Cartes curse

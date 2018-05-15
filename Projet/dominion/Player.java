@@ -1,6 +1,10 @@
 package dominion;
 import java.util.*;
 import dominion.card.*;
+import dominion.card.common.Copper;
+import dominion.card.common.Duchy;
+import dominion.card.common.Estate;
+import dominion.card.common.Province;
 
 /**
  * Un joueur de Dominion
@@ -65,8 +69,23 @@ public class Player {
 	 * préparer la main du joueur après avoir placé les cartes dans la défausse.
 	 */
 	public Player(String name, Game game) {
+		actions=0;
+		money=0;
+		buys=0;
+		hand=new CardList();
+		discard=new CardList();
+		draw=new CardList();
+		inPlay=new CardList();
+		hand=new CardList();
 		this.name=name;
 		this.game=game;
+		for(int i=0;i<3;i++){
+			discard.add(new Estate());
+		}
+		for(int i=0;i<7;i++){
+			discard.add(new Copper());
+		}
+		endTurn();
 	}
 
 	/**
@@ -263,10 +282,10 @@ public class Player {
 	 */
 	public CardList getTreasureCards() {
 		CardList a = new CardList();
-		for(int i=0;i<hand.size();i++){
-			List<CardType> listeDesTypes = hand.get(i).getTypes();
+		for (Card i: hand) {
+			List<CardType> listeDesTypes = i.getTypes();
 			if(listeDesTypes.contains(CardType.Treasure)){
-				a.add(hand.get(i));
+				a.add(i);
 			}
 		}
 		return a;
@@ -277,9 +296,10 @@ public class Player {
 	 */
 	public CardList getActionCards() {
 		CardList a = new CardList();
-		for(int i=0;i<hand.size();i++){
-			List<CardType> listeDesTypes = hand.get(i).getTypes();
+		for (Card i: hand) {
+			List<CardType> listeDesTypes = i.getTypes();
 			if(listeDesTypes.contains(CardType.Action)){
+				a.add(i);
 			}
 		}
 		return a;
@@ -290,10 +310,10 @@ public class Player {
 	 */
 	public CardList getVictoryCards() {
 		CardList a = new CardList();
-		for(int i=0;i<hand.size();i++){
-			List<CardType> listeDesTypes = hand.get(i).getTypes();
+		for (Card i: hand) {
+			List<CardType> listeDesTypes = i.getTypes();
 			if(listeDesTypes.contains(CardType.Victory)){
-				a.add(hand.get(i));
+				a.add(i);
 			}
 		}
 		return a;
@@ -326,8 +346,7 @@ public class Player {
 	 * fait rien.
 	 */
 	public void playCard(String cardName) {
-		if(hand.getCard(cardName)!=null && actions>0){
-			incrementActions(-1);
+		if(hand.getCard(cardName)!=null){
 			playCard(hand.getCard(cardName));
 		}
 	}
@@ -526,15 +545,16 @@ public class Player {
 	 * - Le joueur pioche 5 cartes en main
 	 */
 	public void endTurn() {
-		actions=0;
+		actions=1;
+		buys=1;
 		money=0;
-		buys=0;
 		discard.addAll(inPlay);
 		discard.addAll(hand);
 		inPlay.clear();
 		hand.clear();
 		for(int i=0; i<5 ; i++){
-			hand.add(draw.remove(0));
+			Card a = drawCard();
+			hand.add(a);
 		}
 	}
 	
@@ -588,18 +608,18 @@ public class Player {
 		System.out.println("Action");
 		boolean arretForce = false;
 		while(!arretForce && actions!=0 && !getActionCards().isEmpty()){
-			System.out.println("Vous avez en nb d'actions: "+actions);
-			System.out.println("ActionCards: "+getActionCards().toString());
 			String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
 			if(reponse.equals("")){
 				arretForce=true;
 			}else{
+				incrementActions(-1);
 				playCard(reponse);
 			}
 		}
 		
 		
 		//Tresor
+		System.out.println("Trésor");
 		CardList cartestresor = getTreasureCards();
 		for(int i=0;i<cartestresor.size();i++){
 			playCard(cartestresor.get(i).getName());
@@ -609,9 +629,6 @@ public class Player {
 		System.out.println("Achat");
 		arretForce = false;
 		while(!arretForce && buys!=0 && !game.availableSupplyCards().isEmpty()){
-			System.out.println("Vous avez en nb d'actions achat: "+buys);
-			System.out.println("Argent: "+money);
-			System.out.println("Cartes en boutique: "+game.availableSupplyCards().toString());
 			String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);
 			if(reponse.equals("")){
 				arretForce=true;
@@ -621,6 +638,7 @@ public class Player {
 		}
 		
 		//Fin
+		System.out.println("FIN TOUR");
 		endTurn();
 	}
 }
