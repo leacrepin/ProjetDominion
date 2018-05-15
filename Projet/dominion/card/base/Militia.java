@@ -18,7 +18,7 @@ public class Militia extends AttackCard {
 		p.incrementMoney(2);
 		for(Player op : p.otherPlayers()) {
 			while(op.cardsInHand().size()>3) {
-				op.discardCard(op.cardsInHand().remove(op.chooseCard("Entrez le nom de la carte que vous voulez défausser :", op.cardsInHand(), false)));
+				op.discardHand(op.chooseCard("Entrez le nom de la carte que vous voulez défausser :", op.cardsInHand(), false));
 			}
 		}		
 	}

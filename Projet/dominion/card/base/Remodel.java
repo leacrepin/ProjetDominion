@@ -15,13 +15,15 @@ public class Remodel extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		Card thrown = p.cardsInHand().remove(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", p.cardsInHand(), false));
+		String reponse = p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", p.cardsInHand(), false);
+		Card thrown = p.throwHand(reponse);
 		int cost = thrown.getCost() + 2;
 		p.getGame().throwCard(thrown);
-		CardList achats = p.getGame().availableSupplyCards();
-		for(Card c : achats) {
-			if(c.getCost()>cost) {
-				achats.remove(c);
+		CardList supply = new CardList(p.getGame().availableSupplyCards());
+		CardList achats = new CardList();
+		for(Card c : supply) {
+			if(c.getCost()<=cost) {
+				achats.add(c);
 			}
 		}
 		p.gain(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", achats, false)); //TODO canPass ???
