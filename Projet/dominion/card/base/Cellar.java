@@ -18,18 +18,21 @@ public class Cellar extends ActionCard {
 	public void play(Player p) {
 		int pioche = 0;
 		p.incrementActions(1);
-		String reponse = new String();
+		String reponse="";
 		
-		do{
+		boolean arretforce = true;
+		while(arretforce && !p.cardsInHand().isEmpty()){
 			reponse = p.chooseCard("Entrez le nom des cartes que vous voulez défausser (\"\" = passer)", p.cardsInHand(), true);
-			if(reponse!="") {
-				p.discardCard(p.cardsInHand().remove(reponse));
+			if(!reponse.equals("")) {
+				p.discardHand(reponse);
 				pioche++;
+			}else{
+				arretforce=false;
 			}
-		}while(reponse!="" && !p.cardsInHand().isEmpty());
+		}
 		
 		for(int i = 0; i < pioche; i++) {
-			p.drawCard();
+			p.addToHand(p.drawCard());
 		}
 		
 	}

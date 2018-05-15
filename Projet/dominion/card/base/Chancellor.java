@@ -18,11 +18,8 @@ public class Chancellor extends ActionCard {
 	public void play(Player p) {
 		p.incrementMoney(2);
 		List<String> choices = Arrays.asList("y", "n");
-		if(p.choose("Voulez-vous placer votre pioche dans la défausse (y/n) ?", choices, false)=="y") {
-			CardList draw = p.getDraw();
-			for(Card c : draw) {
-				p.discardCard(draw.remove(c.getName()));
-			}
+		if(p.choose("Voulez-vous placer votre pioche dans la défausse (y/n) ?", choices, false).equals("y")) {
+			p.discardDraw();
 		}
 		
 	}

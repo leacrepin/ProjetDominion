@@ -1,7 +1,4 @@
 package dominion.card.base;
-import java.util.Arrays;
-import java.util.List;
-
 import dominion.*;
 import dominion.card.*;
 
@@ -14,43 +11,13 @@ public class Thief extends AttackCard {
 	public Thief() {
 		super("Thief", 4);
 	}
-	
+
 	@Override
 	public void play(Player p) {
-		List<Player> players = p.otherPlayers();
-		Card devoilee;
-		int ecartee;
-		String[]choix = new String[]{"y","n"};
-		List<String> choices = Arrays.asList(choix);
-		//CardList devoilees = new CardList();
-		for(int i = 0; i<players.size();i++) {
-			ecartee = 0;
-			devoilee = players.get(i).drawCard();
-			players.get(i).cardsInHand().remove(devoilee);
-			//devoilees.add(devoilee);
-			if(devoilee.getTypes().contains(CardType.Treasure)) {
-				if(p.choose("Voulez-vous écarter cette carte trésor ?(y/n)", choices, true)=="y") {
-					p.getGame().throwCard(devoilee);
-					ecartee++;
-				} else {
-					p.discardCard(devoilee);
-				}
-			}
-			devoilee = players.get(i).drawCard();
-			players.get(i).cardsInHand().remove(devoilee);
-			//devoilees.add(devoilee);
-			if(devoilee.getTypes().contains(CardType.Treasure)&&ecartee==0) {
-				if(p.choose("Voulez-vous écarter cette carte trésor ?(y/n)", choices, true)=="y") {
-					p.getGame().throwCard(devoilee);
-					ecartee++;
-				} else {
-					p.discardCard(devoilee);
-				}
-			}
-			
-			
-			
-			
+		for(Player pl : p.otherPlayers()) {
+			CardList devoilees = new CardList();
+			devoilees.add(pl.drawCard());
+			devoilees.add(pl.drawCard());
 			// TODO récupérer ou écarter une carte trésor si 'p' le souhaite
 			// TODO défausser ce qui reste
 		}

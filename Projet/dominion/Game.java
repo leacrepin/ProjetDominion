@@ -133,6 +133,7 @@ public class Game {
 	}
 	
 	
+	
 	/**
 	 * Renvoie le joueur correspondant à l'indice passé en argument
 	 * On suppose {@code index} est un indice valide du tableau 

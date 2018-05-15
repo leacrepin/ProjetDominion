@@ -15,27 +15,21 @@ public class Feast extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		p.getGame().throwCard(
-			p.cardsInHand().remove(
-				p.chooseCard(
-					"Entrez le nom de la carte que vous voulez écarter :",
-					p.cardsInHand(),
-					false
-				)
-			)
-		);
+		//TODO A refaire provoque une [ERREUR]
+		String reponse = p.chooseCard("Entrez le nom de la carte que vous voulez écarter :",p.cardsInHand(),false);
+		p.throwHand(reponse);
+		
 		CardList aPiocher = p.getGame().availableSupplyCards();
 		for(Card c : aPiocher) {
 			if(c.getCost()>5) {
 				aPiocher.remove(c);
 			}
 		}
-		p.gain(
-			p.chooseCard(
+		reponse=p.chooseCard(
 				"Entrez le nom de la carte coûtant jusqu'à 5 Pièces, que vous voulez recevoir :",
 				aPiocher,
 				false
-			)
-		);
+			);
+		p.gain(reponse);
 	}
 }	

@@ -17,13 +17,16 @@ public class Chapel extends ActionCard {
 		String reponse = new String();
 		int nb = 4;
 		
-		do {
+		boolean arretforce = true;
+		while(arretforce && nb>0 && !p.cardsInHand().isEmpty()){
 			reponse = p.chooseCard("Entrez le nom de la carte que vous voulez écarter (\"\" = passer)", p.cardsInHand(), true);
-			if(reponse!="") {
-				p.getGame().throwCard(p.cardsInHand().remove(reponse));
+			if(!reponse.equals("")) {
+				p.throwHand(reponse);
 				nb--;
+			}else{
+				arretforce=false;
 			}
-		}while(reponse!="" && nb>0 && !p.cardsInHand().isEmpty());
+		}
 		
 	}
 }

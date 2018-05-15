@@ -1,6 +1,7 @@
 package dominion;
 import java.util.*;
 import dominion.card.*;
+import dominion.card.base.Village;
 import dominion.card.common.Copper;
 import dominion.card.common.Duchy;
 import dominion.card.common.Estate;
@@ -131,6 +132,32 @@ public class Player {
 		discard.add(carte);
 	}
 	
+	/** 
+	 * Ajoute dans la defausse une carte et la retire de la main
+	 * @param String
+	*/
+	public void discardHand(String carte){
+		Card a = hand.remove(carte);
+		discard.add(a);
+	}
+	
+	/** 
+	 * Defausse la pioche
+	*/
+	public void discardDraw(){
+		discard.addAll(draw);
+		draw.clear();
+	}
+	
+	/** 
+	 * Ajoute dans la poubelle une carte et la retire de la main
+	 * @param String
+	*/
+	public void throwHand(String carte){
+		Card a = hand.remove(carte);
+		game.throwCard(a);
+	}
+	
 	/**
 	 * @return le nombre de carte du Deck du joueur
 	 * (Utilise totalCards qui donne la CardList du deck du joueur)
@@ -186,7 +213,8 @@ public class Player {
 	 * défausse, la pioche et en jeu)
 	 */
 	public CardList totalCards() {
-		CardList l=new CardList(hand);
+		CardList l=new CardList();
+		l.addAll(hand);
 		l.addAll(discard);
 		l.addAll(draw);
 		l.addAll(inPlay);
@@ -247,6 +275,16 @@ public class Player {
 				return null;
 			}
 		}
+	}
+	
+	
+	/**
+	 * Ajoute une carte à la main (utilisé pour pioche une carte)
+	 * @param une carte {@code Card}
+	 */
+	public Card addToHand(Card carte){
+		hand.add(carte);
+		return carte;
 	}
 	
 	/**
@@ -400,7 +438,7 @@ public class Player {
 	public Card buyCard(String cardName) {
 		Card carte = game.getFromSupply(cardName);
 		if(carte!=null){
-			if(carte.getCost()<money){
+			if(buys>0 && carte.getCost()<=money){
 				incrementMoney(-carte.getCost());
 				incrementBuys(-1);
 				discard.add(game.removeFromSupply(cardName));
@@ -607,7 +645,7 @@ public class Player {
 		//Action
 		System.out.println("Action");
 		boolean arretForce = false;
-		while(!arretForce && actions!=0 && !getActionCards().isEmpty()){
+		while(!arretForce && actions!=0 && getActionCards().size()!=0){
 			String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
 			if(reponse.equals("")){
 				arretForce=true;
@@ -628,7 +666,7 @@ public class Player {
 		//Achat
 		System.out.println("Achat");
 		arretForce = false;
-		while(!arretForce && buys!=0 && !game.availableSupplyCards().isEmpty()){
+		while(buys>0 && money>0 && !arretForce && !game.availableSupplyCards().isEmpty()){
 			String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);
 			if(reponse.equals("")){
 				arretForce=true;
@@ -640,5 +678,29 @@ public class Player {
 		//Fin
 		System.out.println("FIN TOUR");
 		endTurn();
+	}
+	
+	public static void main(String[] args) {
+		// Noms des joueurs de la partie
+				// (le nombre total de joueurs correspond au nombre de noms dans le 
+				// tableau)
+				String[] playerNames = new String[]{"Marco", "Polo", "Paul"};
+				// Prépare les piles "royaume" de la réserve (hors cartes communes)
+				List<CardList> kingdomStacks = new ArrayList<CardList>();
+				CardList stack;
+				// Ajouter un bloc pour chaque carte royaume à utiliser
+				
+				stack = new CardList();
+				for (int i = 0; i < 10; i++) {
+					stack.add(new Village());
+				}
+				kingdomStacks.add(stack);
+				// Instancie et exécute une partie
+				Game g = new Game(playerNames, kingdomStacks);
+				Player paul = new Player("Paul",g);
+				CardList deck = paul.totalCards();
+				System.out.println(paul.totalCards());
+				System.out.println(paul.victoryPoints());
+				System.out.println(deck.get(0).victoryValue(paul));
 	}
 }

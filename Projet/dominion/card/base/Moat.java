@@ -16,7 +16,7 @@ public class Moat extends ReactionCard {
 	@Override
 	public void play(Player p) {
 		// TODO protection contre attaque
-		p.drawCard();
-		p.drawCard();
+		p.addToHand(p.drawCard());//piocher pour mettre dans la main
+		p.addToHand(p.drawCard());
 	}
 }

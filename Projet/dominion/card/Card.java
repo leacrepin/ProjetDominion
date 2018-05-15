@@ -1,6 +1,7 @@
 package dominion.card;
 import java.util.*;
 import dominion.*;
+import dominion.card.common.Estate;
 
 /**
  * Représentation des cartes du jeu Dominion
@@ -107,7 +108,12 @@ public abstract class Card {
 	 * non nulle).
 	 */
 	public int victoryValue(Player p) {
-		int a = p.victoryPoints();
-		return a;
+		return 0;
+	}
+	
+	
+	public static void main(String[] args) {
+		Card carte = new Estate();
+		System.out.println(carte.getTypes());
 	}
 }

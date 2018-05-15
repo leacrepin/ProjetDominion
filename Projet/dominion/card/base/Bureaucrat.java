@@ -18,17 +18,12 @@ public class Bureaucrat extends AttackCard {
 
 	@Override
 	public void play(Player p) {
-		String reponse = new String();
-		Card removed;
 		p.gain("Copper");
 		p.addToDraw(p.cardsInHand().remove("Copper"));
 		List<Player> players = p.otherPlayers();
 		for(Player pl : players) {
 			if(!pl.getVictoryCards().isEmpty()) {
-				reponse = pl.chooseCard("Entrez le nom d'une carte que vous souhaitez dévoiler :", pl.getVictoryCards(), false);
-				System.out.println(reponse);
-				removed = pl.cardsInHand().remove(reponse);
-				pl.addToDraw(removed);
+				// TODO dévoiler une des cartes Victoire
 			}
 		}
 		
