@@ -18,7 +18,13 @@ public class Witch extends AttackCard {
 		p.addToHand(p.drawCard());
 		p.addToHand(p.drawCard());
 		for(Player pl : p.otherPlayers()) {
-			pl.gain("Curse");
+			if(pl.cardsInHand().getCard("Moat")!=null){
+				if(!((Moat) pl.cardsInHand().getCard("Moat")).protection(pl)){
+					pl.gain("Curse");
+				}
+			}else{
+				pl.gain("Curse");
+			}
 		}
 	}
 }

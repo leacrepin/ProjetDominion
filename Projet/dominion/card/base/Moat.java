@@ -1,4 +1,7 @@
 package dominion.card.base;
+import java.util.Arrays;
+import java.util.List;
+
 import dominion.*;
 import dominion.card.*;
 
@@ -15,8 +18,18 @@ public class Moat extends ReactionCard {
 
 	@Override
 	public void play(Player p) {
-		// TODO protection contre attaque
-		p.addToHand(p.drawCard());//piocher pour mettre dans la main
 		p.addToHand(p.drawCard());
+		p.addToHand(p.drawCard());
+		System.out.println("Le joueur "+p+" dévoile sa carte Moat");
+	}
+	
+	public boolean protection(Player p){
+		List<String> choices = Arrays.asList("y", "n");
+		if(p.choose("Voulez-vous dévoiler votre carte (y/n) ?", choices, false).equals("y")) {
+			play(p);
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
