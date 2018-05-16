@@ -17,9 +17,12 @@ public class ThroneRoom extends ActionCard {
 	public void play(Player p) {
 		CardList choices = p.getActionCards();
 		String cardName = p.chooseCard("Entrez le nom de la carte que vous souhaitez jouer :", choices, false);
-		Card carte = p.cardsInHand().remove(cardName);
-		carte.play(p);
-		carte.play(p);
-		p.discardCard(carte);
+		Card carte = p.cardsInHand().getCard(cardName);
+		p.playCard(cardName);
+		if(carte != null){
+			carte.play(p);
+			p.discardCard(carte);
+		}
+		
 	}
 }
