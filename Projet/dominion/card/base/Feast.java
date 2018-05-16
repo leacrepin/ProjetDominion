@@ -15,7 +15,6 @@ public class Feast extends ActionCard {
 
 	@Override
 	public void play(Player p) {
-		//TODO A refaire provoque une [ERREUR]
 		String reponse = p.chooseCard("Entrez le nom de la carte que vous voulez écarter :",p.cardsInHand(),false);
 		p.throwHand(reponse);
 		
