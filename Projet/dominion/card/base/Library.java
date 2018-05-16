@@ -16,18 +16,19 @@ public class Library extends ActionCard {
 	@Override
 	public void play(Player p) {
 		CardList misesDeCote = new CardList();
-		boolean confirmation;
-		for(int i = 0; i < 7; i++) {
-			Card drawn = p.drawCard();
-			List<CardType> listeDesTypes = drawn.getTypes();
-			if(listeDesTypes.contains(CardType.Action)) {
-				System.out.println("Voulez-vous mettre cette carte Action de côté ?");
-				confirmation = p.confirmer();
-				if(confirmation) {
-					misesDeCote.add(drawn);
-					i--;
+		List<String> choices = Arrays.asList("y","n");
+		List<CardType> listeDesTypes;
+		Card drawn = p.drawCard();
+		while(p.cardsInHand().size()<7 && drawn!=null) {
+				listeDesTypes = drawn.getTypes();
+				if(listeDesTypes.contains(CardType.Action)) {
+					if(p.choose("Voulez-vous mettre cette carte Action de côté ?(y/n)", choices, true)=="y") {
+						misesDeCote.add(drawn);
+					} else {
+						p.addToHand(drawn);
+					}
 				}
-			}
+			drawn = p.drawCard();
 		}
 		for(Card c : misesDeCote) {
 			p.discardCard(c);
