@@ -41,7 +41,7 @@ public abstract class Card {
 	
 	/**
 	 * 
-	 * @return le nom d'une {@code Card}
+	 * @return {@code String } le nom d'une {@code Card}
 	 */
 	public String getName() {
 		return name;

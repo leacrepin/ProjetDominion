@@ -25,7 +25,6 @@ public class Bureaucrat extends AttackCard {
 		CardList choices = new CardList();
 		for(Player pl : players) {
 			if(!pl.getVictoryCards().isEmpty()) {
-				// TODO Echec
 				choices.addAll(pl.getVictoryCards());
 				choix = pl.chooseCard("Entrez le nom de la carte que vous devez dévoiler", choices, false);
 				System.out.println(choix);

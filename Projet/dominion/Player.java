@@ -158,6 +158,18 @@ public class Player {
 		return a;
 	}
 	
+	
+	/**
+	 * Supprime une carte de la main
+	 * @param carte {@code Card}
+	 * @return la {@code Card} supprimée de la main
+	 */
+	public Card removeFromHand(String carte) {
+		Card a = hand.remove(carte);
+		return a;
+	}
+	
+	
 	/** 
 	 * Defausse la pioche
 	*/
