@@ -25,7 +25,7 @@ public class Moat extends ReactionCard {
 	
 	public boolean protection(Player p){
 		List<String> choices = Arrays.asList("y", "n");
-		if(p.choose("Voulez-vous dévoiler votre carte (y/n) ?", choices, false).equals("y")) {
+		if(p.choose("Voulez-vous jouer votre carte Douves (Moat) (y/n) ?", choices, false).equals("y")) {
 			play(p);
 			return true;
 		}else{
