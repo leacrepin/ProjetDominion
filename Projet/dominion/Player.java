@@ -1,16 +1,9 @@
 package dominion;
 import java.util.*;
 import dominion.card.*;
-import dominion.card.base.Moneylender;
-import dominion.card.base.Village;
-import dominion.card.common.Copper;
-import dominion.card.common.Duchy;
-import dominion.card.common.Estate;
-import dominion.card.common.Province;
-import dominion.card.common.Silver;
-import test.GameProxy;
-import test.IOGame;
-import test.PlayerProxy;
+import dominion.card.base.*;
+import dominion.card.common.*;
+
 
 /**
  * Un joueur de Dominion

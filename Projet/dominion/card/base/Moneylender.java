@@ -1,15 +1,7 @@
 package dominion.card.base;
-import java.util.Arrays;
-import java.util.List;
 
 import dominion.*;
 import dominion.card.*;
-import dominion.card.common.Copper;
-import dominion.card.common.Silver;
-import test.GameProxy;
-import test.IOGame;
-import test.PlayerProxy;
-
 /**
  * Carte Prêteur sur gages (Moneylender)
  * 
