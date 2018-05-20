@@ -685,8 +685,8 @@ public class Player {
 		startTurn();
 		
 		//Action
-		System.out.println("Action");
 		boolean arretForce = false;
+		System.out.println(getActionCards());
 		while(!arretForce && actions!=0 && getActionCards().size()!=0){
 			String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
 			if(reponse.equals("")){
@@ -699,14 +699,12 @@ public class Player {
 		
 		
 		//Tresor
-		System.out.println("Trésor");
 		CardList cartestresor = getTreasureCards();
 		for(int i=0;i<cartestresor.size();i++){
 			playCard(cartestresor.get(i).getName());
 		}
 		
 		//Achat
-		System.out.println("Achat");
 		arretForce = false;
 		while(buys>0 && money>0 && !arretForce && !game.availableSupplyCards().isEmpty()){
 			String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);

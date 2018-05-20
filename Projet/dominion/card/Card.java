@@ -1,7 +1,9 @@
 package dominion.card;
 import java.util.*;
 import dominion.*;
-import dominion.card.common.Estate;
+import dominion.card.*;
+import dominion.card.base.*;
+import dominion.card.common.*;
 
 /**
  * Représentation des cartes du jeu Dominion
@@ -65,12 +67,14 @@ public abstract class Card {
 			}
 			if(classe.equals("ReactionCard")){
 				a.add(CardType.Reaction);
+				a.add(CardType.Action);
 			}
 			if(classe.equals("VictoryCard")){
 				a.add(CardType.Victory);
 			}
 			if(classe.equals("AttackCard")){
 				a.add(CardType.Attack);
+				a.add(CardType.Action);
 			}
 			if(classe.equals("ActionCard")){
 				a.add(CardType.Action);
@@ -113,7 +117,7 @@ public abstract class Card {
 	
 	
 	public static void main(String[] args) {
-		Card carte = new Estate();
+		Card carte = new Moat();
 		System.out.println(carte.getTypes());
 	}
 }
