@@ -26,7 +26,7 @@ public class Remodel extends ActionCard {
 					achats.add(c);
 				}
 			}
-			p.gain(p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", achats, false));
+			p.gain(p.chooseCard("Entrez le nom d'une carte que vous souhaitez recevoir coûtant jusqu'à "+cost+" :", achats, false));
 		}
 	}
 }

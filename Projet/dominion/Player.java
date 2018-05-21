@@ -638,21 +638,6 @@ public class Player {
 		}
 	}
 	
-	
-	/**
-	 * Demande un choix (oui/non)
-	 */
-	
-	public boolean confirmer(){
-		List<String> choices = Arrays.asList("y", "n");
-		String reponse = choose("(y/n)", choices, false);
-		if(!reponse.equals("y")){
-			return(true);
-		}else{
-			return(false);
-		}
-	}
-	
 	/**
 	 * Exécute le tour d'un joueur
 	 * 
@@ -688,7 +673,7 @@ public class Player {
 		boolean arretForce = false;
 		System.out.println(getActionCards());
 		while(!arretForce && actions!=0 && getActionCards().size()!=0){
-			String reponse = chooseCard("Choose an Action card.", getActionCards(), true);;
+			String reponse = chooseCard("Choisissez une carte que vous souhaitez jouer :", getActionCards(), true);;
 			if(reponse.equals("")){
 				arretForce=true;
 			}else{
@@ -707,7 +692,7 @@ public class Player {
 		//Achat
 		arretForce = false;
 		while(buys>0 && money>0 && !arretForce && !game.availableSupplyCards().isEmpty()){
-			String reponse = chooseCard("Choose a card.", game.availableSupplyCards(), true);
+			String reponse = chooseCard("Choisissez une carte que vous souhaitez recevoir :", game.availableSupplyCards(), true);
 			if(reponse.equals("")){
 				arretForce=true;
 			}else{

@@ -22,7 +22,7 @@ public class Library extends ActionCard {
 		while(p.cardsInHand().size()<7 && drawn!=null) {
 				listeDesTypes = drawn.getTypes();
 				if(listeDesTypes.contains(CardType.Action)) {
-					if(p.choose("Voulez-vous mettre cette carte Action "+drawn.getName()+" de côté ?(y/n)", choices, false).equals("y")) {
+					if(p.choose("Voulez-vous mettre cette carte Action \""+drawn.getName()+"\" de côté ?(y/n)", choices, false).equals("y")) {
 						misesDeCote.add(drawn);
 					} else {
 						p.addToHand(drawn);

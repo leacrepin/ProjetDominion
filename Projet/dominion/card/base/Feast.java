@@ -25,7 +25,7 @@ public class Feast extends ActionCard {
 				aPiocher.add(c);
 			}
 		}
-		reponse=p.chooseCard("Entrez le nom de la carte coûtant jusqu'à 5 Pièces, que vous voulez recevoir :",aPiocher,false);
+		reponse=p.chooseCard("Entrez le nom de la carte que vous voulez recevoir coûtant jusqu'à 5 :",aPiocher,false);
 		p.gain(reponse);
 	}
 }	

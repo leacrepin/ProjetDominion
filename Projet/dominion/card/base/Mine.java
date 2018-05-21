@@ -18,7 +18,7 @@ public class Mine extends ActionCard {
 	public void play(Player p) {
 		if(!p.getTreasureCards().isEmpty()) {
 			CardList tresors = p.getTreasureCards();
-			String reponse = p.chooseCard("Entrez le nom d'une carte que vous souhaitez écarter :", tresors, false);
+			String reponse = p.chooseCard("Entrez le nom d'une carte trésor que vous souhaitez écarter :", tresors, false);
 			Card thrown = p.throwHand(reponse);
 			int cost = thrown.getCost()+3;
 			CardList supply = p.getGame().availableSupplyCards();
@@ -28,7 +28,7 @@ public class Mine extends ActionCard {
 					aRecevoir.add(c);
 				}
 			}
-			reponse=p.chooseCard("Entrez le nom de la carte que vous souhaitez recevoir :", aRecevoir, false);
+			reponse=p.chooseCard("Entrez le nom de la carte trésor que vous souhaitez recevoir coûtant jusqu'à "+cost+" :", aRecevoir, false);
 			p.gainHand(reponse);
 			
 		}

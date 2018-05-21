@@ -21,6 +21,6 @@ public class Workshop extends ActionCard {
 				achats.add(carte);
 			}
 		}
-		p.gain(p.chooseCard("Entrez le nom d'une carte que vous voulez recevoir :", achats, false));	
+		p.gain(p.chooseCard("Entrez le nom d'une carte que vous voulez recevoir coûtant jusqu'à 4 :", achats, false));	
 	}
 }
